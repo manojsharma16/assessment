@@ -1,0 +1,13 @@
+.movie-poster{
+    height : 300px;
+    width : 295px;
+}
+
+.card{
+    height:455
+}
+
+.no-data{
+    font-size: 20px;
+    margin-top: 60px;
+}

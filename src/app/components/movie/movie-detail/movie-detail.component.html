@@ -1,0 +1,20 @@
+<div *ngIf="!showLoader">
+    <hr class="m-5"/> 
+    <div class="card card-side bg-base-100 shadow-xl">
+        <figure><img class="poster" [attr.src]="movieData?.Poster" alt="Movie"/></figure>
+        <div class="card-body">
+          <h2 class="card-title">{{movieData?.Title}}</h2>
+            <p>{{'Actors : '+movieData?.Actors}}</p>
+            <p>{{'Released on : '+movieData?.Released}}</p>
+            <p>{{'Duration : '+movieData?.Runtime}}</p>
+            <p>{{'IMDB Rating : '+movieData?.imdbRating}}</p>
+            <p>{{'Box Office : '+movieData?.BoxOffice}}</p>
+            <p>{{'Plot : '+movieData?.Plot}}</p>
+          <div class="card-actions justify-center">
+            <button class="btn btn-primary">Watch</button>
+          </div>
+        </div>
+      </div>
+</div>
+
+<app-loader *ngIf="showLoader"></app-loader>
