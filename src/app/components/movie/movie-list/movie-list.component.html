@@ -53,8 +53,8 @@
                 alt="Movie name" /></figure>
         <div class="card-body">
             <h2 class="card-title">{{data.Title}}</h2>
-            <p>Type : {{data.Type}}</p>
-            <p>Released year : {{data.Year}}</p>
+            <p><b>Type : </b>{{data.Type}}</p>
+            <p><b>Year : </b>{{data.Year}}</p>
         </div>
         <div class="card-actions justify-center m-2">
             <button class="btn btn-primary" [routerLink]="'/movie-detail/'+data.imdbID">Details</button>

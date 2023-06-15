@@ -3,13 +3,13 @@
     <div class="card card-side bg-base-100 shadow-xl">
         <figure><img class="poster" [attr.src]="!movieData.Poster || movieData.Poster=='' || movieData.Poster == 'N/A' ? 'assets/images/movie_default.png' : movieData.Poster " alt="Movie"/></figure>
         <div class="card-body">
-          <h2 class="card-title">{{movieData?.Title}}</h2>
-            <p>{{'Actors : '+movieData?.Actors}}</p>
-            <p>{{'Released on : '+movieData?.Released}}</p>
-            <p>{{'Duration : '+movieData?.Runtime}}</p>
-            <p>{{'IMDB Rating : '+movieData?.imdbRating}}</p>
-            <p>{{'Box Office : '+movieData?.BoxOffice}}</p>
-            <p>{{'Plot : '+movieData?.Plot}}</p>
+          <h2 class="card-title">{{movieData?.Title ? movieData?.Title : 'N/A'}}</h2>
+            <p><b>Actors : </b>{{movieData?.Actors ? movieData?.Actors : 'N/A'}}</p>
+            <p><b>Released on : </b>{{movieData?.Released? movieData?.Released : 'N/A'}}</p>
+            <p><b>Genre : </b>{{movieData?.Genre ? movieData?.Genre : 'N/A'}}</p>
+            <p><b>IMDB Rating </b>:{{movieData?.imdbRating ? movieData?.imdbRating : ''}}</p>
+            <p><b>Box Office :</b>{{movieData?.BoxOffice ? movieData?.BoxOffice : 'N/A'}}</p>
+            <p><b>Plot : </b>{{movieData?.Plot}}</p>
           <div class="card-actions justify-center">
             <button class="btn btn-primary" (click)="back()">Back</button>
           </div>

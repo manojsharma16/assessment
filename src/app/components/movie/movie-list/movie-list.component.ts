@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MovieListComponent {
   public movieData: any;
-  public searchKey: any = '';
+  public searchKey: any;
   public page: number = 1;
   public showLoader: boolean = false;
   public resultPerPage: any = 10;
@@ -20,10 +20,10 @@ export class MovieListComponent {
   constructor(private movieListService: MovieListService, private _location: Location, private activatedRoute: ActivatedRoute) {
     this.activatedRoute.queryParams.subscribe(params => {
       if (Object.keys(params).length > 0) {
-        if(params['searchkey']){
+        if (params['searchkey']) {
           this.searchKey = params['searchkey'];
         }
-        if(params['page']){
+        if (params['page']) {
           this.page = params['page'];
         }
       }
@@ -38,7 +38,7 @@ export class MovieListComponent {
     this.totalPage = 0;
     this.resultPerPage = 10;
     this.showLoader = true;
-    const params = { 'page': this.page, 'searchKey': this.searchKey }
+    const params = { 'page': this.page, 'searchKey': this.searchKey ? this.searchKey : 'funny' }
     this.movieListService.getMovieList(params).subscribe((res) => {
       if (res.Response != "False") {
         this.movieData = res.Search;
@@ -70,19 +70,17 @@ export class MovieListComponent {
 
   //update current url on search with queryparameter
   updateUrl() {
-    this.searchKey.trim()
+    this.searchKey?.trim()
     if (this.searchKey) {
-      this._location.go('movie-list?searchkey=' + this.searchKey+'&page='+this.page)
+      this._location.go('movie-list?searchkey=' + this.searchKey + '&page=' + this.page)
     } else {
-      this._location.go('movie-list')
+      this._location.go('movie-list?page=' + this.page)
     }
   }
 
   //function to show max record in single page
-  dataPerPage(event : any) {
-    console.log(event.target.value)
+  dataPerPage(event: any) {
     this.resultPerPage = event.target.value;
-    
   }
 
   //previous page
@@ -94,6 +92,7 @@ export class MovieListComponent {
 
   //next page
   nextPage() {
+    console.log("next page")
     this.page++;
     this.updateUrl();
     this.getData();
