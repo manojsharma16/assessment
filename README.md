@@ -1,2 +1,37 @@
 # assessment
 assessment task for client
+
+Get started
+Clone the repo
+
+git clone https://github.com/bryanforbes/intern-angular
+cd intern-angular
+
+Install npm packages
+
+Install the npm packages described in the package.json and verify that it works:
+
+npm install
+npm start
+
+The npm start command builds (compiles TypeScript and copies assets) the application into dist/, watches for changes to the source files, and runs lite-server on port 4200.
+
+Shut it down manually with Ctrl-C.
+npm scripts
+
+These are the most useful commands defined in package.json:
+
+    npm start - runs the TypeScript compiler, asset copier, and a server at the same time, all three in "watch mode".
+    npm run build - runs the TypeScript compiler and asset copier once.
+    npm run build:watch - runs the TypeScript compiler and asset copier in "watch mode"; when changes occur to source files, they will be recompiled or copied into dist/.
+    npm run lint - runs tslint on the project files.
+    npm run serve - runs lite-server.
+
+These are the test-related scripts:
+
+    npm test - builds the application and runs Intern tests (both unit and functional) one time.
+    npm run ci - cleans, lints, and builds the application and runs Intern tests (both unit and functional) one time.
+
+Imortant note : The requirement given to build the application is done, but there certain api limitaion because of which some point can't be completed like the api fetch only 10 records at a time and there is no api available to fetch all records in a single api call so i have implement pagination based on fixed number of 10 records per page.
+
+

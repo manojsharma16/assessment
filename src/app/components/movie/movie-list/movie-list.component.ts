@@ -13,9 +13,11 @@ export class MovieListComponent {
   public page: number = 1;
   public showLoader: boolean = false;
   public resultPerPage: any = 10;
-  public optionsPerPage: any = [10, 20, 50, 'All']
+  public optionsPerPage: any = ['All', 10, 20, 50]
+  public yearList : any = ['All',2023,2022,2021,2020,2019,2018,2017,2016,2015,2014]
   public totalRecords: number = 0;
   public totalPage: number = 0;
+  public currentYear : any = '';
 
   constructor(private movieListService: MovieListService, private _location: Location, private activatedRoute: ActivatedRoute) {
     this.activatedRoute.queryParams.subscribe(params => {
@@ -25,6 +27,9 @@ export class MovieListComponent {
         }
         if (params['page']) {
           this.page = params['page'];
+        }
+        if (params['year']) {
+          this.currentYear = params['year'];
         }
       }
     })
@@ -38,7 +43,7 @@ export class MovieListComponent {
     this.totalPage = 0;
     this.resultPerPage = 10;
     this.showLoader = true;
-    const params = { 'page': this.page, 'searchKey': this.searchKey ? this.searchKey : 'funny' }
+    const params = { 'page': this.page, 'searchKey': this.searchKey ? this.searchKey : 'funny','year' : this.currentYear }
     this.movieListService.getMovieList(params).subscribe((res) => {
       if (res.Response != "False") {
         this.movieData = res.Search;
@@ -64,6 +69,7 @@ export class MovieListComponent {
   reset() {
     this.page = 1;
     this.searchKey = '';
+    this.currentYear = '';
     this.getData();
     this.updateUrl();
   }
@@ -72,9 +78,9 @@ export class MovieListComponent {
   updateUrl() {
     this.searchKey?.trim()
     if (this.searchKey) {
-      this._location.go('movie-list?searchkey=' + this.searchKey + '&page=' + this.page)
+      this._location.go('movie-list?searchkey=' + this.searchKey + '&page=' + this.page + '&year=' + this.currentYear)
     } else {
-      this._location.go('movie-list?page=' + this.page)
+      this._location.go('movie-list?page=' + this.page + '&year=' + this.currentYear)
     }
   }
 
@@ -94,6 +100,14 @@ export class MovieListComponent {
   nextPage() {
     console.log("next page")
     this.page++;
+    this.updateUrl();
+    this.getData();
+  }
+
+  selctYear(event : any){
+    this.page = 1;
+    this.currentYear = event.target.value == 'All' ?  '' : event.target.value;
+
     this.updateUrl();
     this.getData();
   }

@@ -14,10 +14,12 @@ export class MovieListService {
 
   getMovieList(params : any){
     let queryParams = new HttpParams();
-    queryParams = queryParams.append("page",params.page);
+    queryParams = queryParams.append('page',params.page);
+    queryParams = queryParams.append('s',params.searchKey);
+    queryParams = queryParams.append('y',params.year);
+    queryParams = queryParams.append('plot','full');
     queryParams = queryParams.append("apikey",environment.apikey);
-    queryParams = queryParams.append("s",params.searchKey);
-    return this.http.get<any>('http://www.omdbapi.com/',{params:queryParams}).pipe(map(res=>{
+    return this.http.get<any>('https://www.omdbapi.com/',{params:queryParams}).pipe(map(res=>{
 			return res;
 		}),
     catchError(err=>{
@@ -29,7 +31,7 @@ export class MovieListService {
     let queryParams = new HttpParams();
     queryParams = queryParams.append("apikey",environment.apikey);
     queryParams = queryParams.append("i",params.imdbID);
-    return this.http.get<any>('http://www.omdbapi.com/',{params:queryParams}).pipe(map(res=>{
+    return this.http.get<any>('https://www.omdbapi.com/',{params:queryParams}).pipe(map(res=>{
 			return res;
 		}),
     catchError(err=>{
