@@ -29,8 +29,17 @@
             class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
             <span>Reset</span>
         </button>
+        
     
 </div>
+<div class="form-control w-30 max-w-xs border-black mr-4">
+    <label class="label">
+      <span class="label-text">Record per page</span>
+    </label>
+    <select  (change)="dataPerPage($event)" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      <option *ngFor="let data of optionsPerPage" [value]="data" [selected]="data==resultPerPage">{{data}}</option>
+    </select>
+  </div>
 
 </form>
 
@@ -40,7 +49,7 @@
 <div class="grid grid-cols-4 gap-5" *ngIf="movieData && movieData.length>0; else elseBlock">
     <div class="card h-200 w-95 bg-base-100 m-4 shadow-xl" *ngFor="let data of movieData">
         <figure><img class="movie-poster"
-                [attr.src]="!data.Poster || data.Poster=='' || data.Poster == 'N/A' ? 'assets/images/movie_default.png' : data.Poster "
+                [attr.src]="!data.Poster || data.Poster=='' || data.Poster == 'N/A' ? 'assets/images/movie_default.png' : data.Poster"
                 alt="Movie name" /></figure>
         <div class="card-body">
             <h2 class="card-title">{{data.Title}}</h2>
@@ -61,14 +70,10 @@
 
 <!-- Pagination starts -->
 
-<div class="join text-center m-4" *ngIf="movieData && movieData.length>10">
-    <button class="join-item btn">«</button>
-    <button class="join-item btn">1</button>
-    <button class="join-item btn">2</button>
-    <button class="join-item btn btn-disabled">...</button>
-    <button class="join-item btn">99</button>
-    <button class="join-item btn">100</button>
-    <button class="join-item btn">»</button>
+<div class="join justify-center m-4 pagination" *ngIf="totalRecords && totalRecords>10">
+    <button class="join-item btn" [disabled]="page==1" (click)="prePage()">«</button>
+    <button class="join-item btn">Page {{page}}</button>
+    <button class="join-item btn" [disabled]="!(page<totalPage)" (click)="nextPage()">»</button>
 </div>
 <!-- Pagination ends -->
 
